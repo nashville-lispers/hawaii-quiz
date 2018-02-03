@@ -1,34 +1,98 @@
 body {
-  font-family: 'Helvetica Neue', Verdana, Helvetica, Arial, sans-serif;
-  max-width: 600px;
-  margin: 0 auto;
-  padding-top: 72px;
-  -webkit-font-smoothing: antialiased;
-  font-size: 1.125em;
-  color: #333;
-  line-height: 1.5em;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
-h1, h2, h3 {
-  color: #000;
-}
-h1 {
-  font-size: 2.5em
-}
-
-h2 {
-  font-size: 2em
-}
-
-h3 {
-  font-size: 1.5em
+.App {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
 }
 
-a {
-  text-decoration: none;
-  color: #09f;
+.border {
+  border: 2px solid red;
 }
 
-a:hover {
-  text-decoration: underline;
+.hide {
+  display: none;
+}
+
+.dashboard {
+  background: green;
+  height: 400px;
+  width: 500px;
+}
+
+.dashboard li {
+  list-style: none;
+}
+
+.ocean {
+  position: relative;
+  background: #b3d9fb;
+  height: 400px;
+  width: 500px;
+}
+
+.ocean div {
+  position: absolute;
+}
+
+.niihau {
+  top: 50px;
+  left: 35px;
+  height: 30px;
+  width: 20px;
+}
+
+.kauai {
+  top: 15px;
+  left: 75px;
+  height: 45px;
+  width: 45px;
+}
+
+.oahu {
+  top: 55px;
+  left: 205px;
+  height: 50px;
+  width: 50px;
+}
+
+.molokai {
+  top: 105px;
+  left: 280px;
+  height: 15px;
+  width: 45px;
+}
+
+.lanai {
+  top: 130px;
+  left: 300px;
+  height: 20px;
+  width: 25px;
+}
+
+.maui {
+  top: 115px;
+  left: 315px;
+  height: 30px;
+  width: 55px;
+}
+.kahoolawe {
+  top: 150px;
+  left: 325px;
+  height: 8px;
+  width: 12px;
+}
+.hawaii {
+  top: 170px;
+  left: 360px;
+  height: 100px;
+  width: 100px;
 }
