@@ -16,7 +16,10 @@
 ;; -------------------------
 ;; Views
 (defn score-board []
-  )
+  [:div
+   [:h3 "Welcome to Pick An Island!"]
+   [:button "Start/Reset"]
+   [:p "When the timer starts, click the name that corresponds to the island with a red border"]])
 
 (defn island [name]
   (let [normal-name (clojure.string/lower-case name) ]
@@ -35,7 +38,9 @@
 (defn home-page []
   [:div.App
    [:div.ocean (islands)]
-   [:div.dashboard [button-list]]])
+   [:div.dashboard
+    [score-board]
+    [button-list]]])
 ;; -------------------------
 ;; Initialize app
 
