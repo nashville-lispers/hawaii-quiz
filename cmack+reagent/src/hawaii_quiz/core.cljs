@@ -14,12 +14,33 @@
 (defn random-island []
   (take 1 (shuffle island-names)))
 
+(defn start-timer []
+  (swap! initial-state assoc :seconds 30)
+
+  (letfn [(tick []
+            (.log js/console (:seconds @initial-state))
+            (when (pos? (:seconds @initial-state))
+              (swap! initial-state update :seconds dec)
+              (recur)))]
+    (fn []
+      (.log js/console "Hello, world!" tick)
+      (js/setTimeout tick 1000))))
+
 ;; -------------------------
 ;; Views
-(defn score-board []
+
+(defn score-board [num-correct num-wrong seconds start-timer-fn]
   [:div
-   [:h3 "Welcome to Pick An Island!"]
-   [:button "Start/Reset"]
+   (if (= 0 num-correct num-wrong)
+     [:h3 "Welcome to Pick An Island!"]
+     [:div
+      [:div (str "Correct: " num-correct)]
+      [:div (str "Wrong: " num-wrong)]])
+
+   (if (= 0 seconds)
+     [:button {:on-click start-timer-fn} "Start/Reset"]
+     [:div (str seconds " seconds")])
+
    [:p "When the timer starts, click the name that corresponds to the island with a red border"]])
 
 (defn island [name]
@@ -43,8 +64,10 @@
       (islands selected-island))]
 
    [:div.dashboard
-    [score-board]
+    (let [{:keys [correct-answers wrong-answers seconds]} @initial-state]
+      [score-board correct-answers wrong-answers seconds (start-timer)])
     [button-list]]])
+
 ;; -------------------------
 ;; Initialize app
 
