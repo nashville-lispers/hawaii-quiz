@@ -1,3 +1,8 @@
+Project started with
+
+```
+lein new reagent-frontend project-name
+```
 
 ### Development mode
 
