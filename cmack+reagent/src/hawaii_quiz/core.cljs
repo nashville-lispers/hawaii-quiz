@@ -2,16 +2,9 @@
   (:require
    [reagent.core :as r]))
 
-(def island-names [
-                   "NIIHAU"
-                   "KAUAI"
-                   "OAHU"
-                   "MOLOKAI"
-                   "LANAI"
-                   "MAUI"
-                   "HAWAII"
-                   "KAHOOLAWE"
-                   ])
+(def island-names
+  ["NIIHAU" "KAUAI" "OAHU" "MOLOKAI" "LANAI" "MAUI" "HAWAII" "KAHOOLAWE"])
+
 
 ;; -------------------------
 ;; Views
