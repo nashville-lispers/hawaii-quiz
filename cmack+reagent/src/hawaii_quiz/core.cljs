@@ -6,6 +6,14 @@
   ["NIIHAU" "KAUAI" "OAHU" "MOLOKAI" "LANAI" "MAUI" "HAWAII" "KAHOOLAWE"])
 
 
+(def initial-state (r/atom {:correct-answers 0
+                            :wrong-answers 0
+                            :seconds 0
+                            :selected-island island-names}))
+
+(defn random-island []
+  (take 1 (shuffle island-names)))
+
 ;; -------------------------
 ;; Views
 (defn score-board []
@@ -19,7 +27,7 @@
     [:div {:class normal-name}
      [:img {:src (str "img/" normal-name ".svg")}]]))
 
-(defn islands []
+(defn islands [selected-island]
   (map (fn [name] ^{:key name} [island name])
        island-names))
 
@@ -30,7 +38,10 @@
 
 (defn home-page []
   [:div.App
-   [:div.ocean (islands)]
+   [:div.ocean
+    (let [{:keys [selected-island]} @initial-state]
+      (islands selected-island))]
+
    [:div.dashboard
     [score-board]
     [button-list]]])
