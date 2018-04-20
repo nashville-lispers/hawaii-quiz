@@ -81,10 +81,11 @@
     (let [{:keys [selected-island]} @initial-state]
       (islands selected-island))]
 
-   [:div.dashboard
-    (let [{:keys [correct-answers wrong-answers seconds]} @initial-state]
-      [score-board correct-answers wrong-answers seconds start-timer])
-    [button-list]]])
+   (let [{:keys [correct-answers wrong-answers seconds]} @initial-state]
+     [:div.dashboard
+      [score-board correct-answers wrong-answers seconds start-timer]
+      (when (pos? seconds)
+        [button-list])])])
 
 ;; -------------------------
 ;; Initialize app
