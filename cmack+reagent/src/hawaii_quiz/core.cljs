@@ -18,8 +18,11 @@
   (swap! initial-state assoc :selected-island (random-island)))
 
 (defn start-timer []
-  (select-random-island)
-  (swap! initial-state assoc :seconds 30)
+  (swap! initial-state assoc
+         :seconds 30
+         :correct-answers 0
+         :wrong-answers 0
+         :selected-island (random-island))
 
   (letfn [(tick []
             (swap! initial-state update :seconds dec)
