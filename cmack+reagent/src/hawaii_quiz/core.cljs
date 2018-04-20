@@ -22,7 +22,7 @@
             (swap! initial-state update :seconds dec)
             (when (pos? (:seconds @initial-state))
               (js/setTimeout tick 1000)))]
-    tick))
+    (tick)))
 
 ;; -------------------------
 ;; Views
