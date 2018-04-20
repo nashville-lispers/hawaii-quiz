@@ -19,12 +19,10 @@
 
   (letfn [(tick []
             (.log js/console (:seconds @initial-state))
+            (swap! initial-state update :seconds dec)
             (when (pos? (:seconds @initial-state))
-              (swap! initial-state update :seconds dec)
-              (recur)))]
-    (fn []
-      (.log js/console "Hello, world!" tick)
-      (js/setTimeout tick 1000))))
+              (js/setTimeout tick 1000)))]
+    tick))
 
 ;; -------------------------
 ;; Views
@@ -65,7 +63,7 @@
 
    [:div.dashboard
     (let [{:keys [correct-answers wrong-answers seconds]} @initial-state]
-      [score-board correct-answers wrong-answers seconds (start-timer)])
+      [score-board correct-answers wrong-answers seconds start-timer])
     [button-list]]])
 
 ;; -------------------------
