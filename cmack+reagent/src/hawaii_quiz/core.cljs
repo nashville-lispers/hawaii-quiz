@@ -58,13 +58,14 @@
 
    [:p "When the timer starts, click the name that corresponds to the island with a red border"]])
 
-(defn island [name]
+(defn island [name show-border]
   (let [normal-name (clojure.string/lower-case name) ]
-    [:div {:class normal-name}
+    [:div {:class (str normal-name (when show-border " border"))}
      [:img {:src (str "img/" normal-name ".svg")}]]))
 
 (defn islands [selected-island]
-  (map (fn [name] ^{:key name} [island name])
+  (map (fn [name] ^{:key name}
+         [island name (island-name-equal? name selected-island)])
        island-names))
 
 (defn button-list []
