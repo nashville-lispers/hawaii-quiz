@@ -9,20 +9,37 @@
 (def initial-state (r/atom {:correct-answers 0
                             :wrong-answers 0
                             :seconds 0
-                            :selected-island island-names}))
+                            :selected-island nil}))
 
 (defn random-island []
-  (take 1 (shuffle island-names)))
+  (first (shuffle island-names)))
+
+(defn select-random-island []
+  (swap! initial-state assoc :selected-island (random-island)))
 
 (defn start-timer []
+  (select-random-island)
   (swap! initial-state assoc :seconds 30)
 
   (letfn [(tick []
-            (.log js/console (:seconds @initial-state))
             (swap! initial-state update :seconds dec)
             (when (pos? (:seconds @initial-state))
               (js/setTimeout tick 1000)))]
     (tick)))
+
+(defn- island-name-equal? [name-1 name-2]
+  (and name-1
+       name-2
+       (= (clojure.string/lower-case name-1)
+          (clojure.string/lower-case name-2))))
+
+(defn check-answer [name]
+  (swap! initial-state update
+         (if (island-name-equal? name (:selected-island @initial-state))
+           :correct-answers
+           :wrong-answers)
+         inc)
+  (select-random-island))
 
 ;; -------------------------
 ;; Views
@@ -52,7 +69,9 @@
 
 (defn button-list []
   [:ul
-   (map (fn [item] ^{:key item} [:li [:button item]])
+   (map (fn [name] ^{:key name}
+          [:li
+           [:button {:on-click #(check-answer name)} name]])
         island-names)])
 
 (defn home-page []
