@@ -49,7 +49,7 @@
 
 (defn score-board [num-correct num-wrong seconds start-timer-fn]
   [:div
-   (if (= 0 num-correct num-wrong)
+   (if (= 0 num-correct num-wrong seconds)
      [:h3 "Welcome to Pick An Island!"]
      [:div
       [:div (str "Correct: " num-correct)]
